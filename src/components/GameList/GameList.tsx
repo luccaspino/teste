@@ -1,62 +1,93 @@
-import React, { useState, useEffect } from 'react';
-import GameCard from '../GameCard/GameCard';
+import React, { useState } from 'react';
+import './GameCard.css'; // Arquivo CSS que forneci anteriormente
 
-interface Game {
-  id: number;
-  name: string;
-  released: string;
-  background_image: string;
-  rating: number;
-  ratings_count: number;
+interface GameCardProps {
+    title: string;
+    subtitle?: string;
+    imageUrl: string;
+    isTrending?: boolean;
+    releaseInfo?: string;
+    rating?: number;
 }
 
-const GameList: React.FC = () => {
-  const [games, setGames] = useState<Game[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+const GameCard: React.FC<GameCardProps> = ({ 
+    title, 
+    subtitle,
+    imageUrl, 
+    isTrending = false,
+    releaseInfo,
+    rating
+}) => {
+    const [imageLoaded, setImageLoaded] = useState(false);
+    const [imageError, setImageError] = useState(false);
 
-  const API_KEY = 'ac25b624a98d4348bc5c4a45abb34eed';
-
-  useEffect(() => {
-    const fetchGames = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch(
-          `https://api.rawg.io/api/games?key=${API_KEY}&dates=2015-01-01,2024-12-31&ordering=-added&page_size=5`
-        );
-        
-        if (!response.ok) throw new Error('Failed to fetch games');
-        
-        const data = await response.json();
-        setGames(data.results);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Unknown error');
-      } finally {
-        setLoading(false);
-      }
+    const handleImageLoad = () => {
+        setImageLoaded(true);
+        setImageError(false);
+    };
+    React.useEffect(() => {
+        if (imageError) {
+            console.warn(`Image failed to load: ${imageUrl}`);
+        }
+    }, [imageError, imageUrl]);
+    const handleImageError = () => {
+        setImageLoaded(false);
+        setImageError(true);
     };
 
-    fetchGames();
-  }, []);
+    return (
+        <div className={`game-card ${isTrending ? 'trending' : ''}`}>
+            <div className="card-image-container">
+                {!imageError ? (
+                    <img 
+                        src={imageUrl} 
+                        alt={title} 
+                        className={`card-image ${imageLoaded ? 'loaded' : ''}`}
+                        onLoad={handleImageLoad}
+                        onError={handleImageError}
+                    />
+                ) : (
+                    <div className="card-image error">
+                        {/* SVG fallback incorporado */}
+                        <svg 
+                            xmlns="http://www.w3.org/2000/svg" 
+                            viewBox="0 0 100 100" 
+                            preserveAspectRatio="xMidYMid meet"
+                        >
+                            <rect width="100" height="100" fill="#2a2a2a" />
+                            <text 
+                                x="50" 
+                                y="50" 
+                                fontFamily="Arial" 
+                                fontSize="10" 
+                                textAnchor="middle" 
+                                fill="white"
+                                dy=".3em"
+                            >
+                                Sem imagem
+                            </text>
+                        </svg>
+                    </div>
+                )}
+                {isTrending && <span className="trending-badge">TRENDING</span>}
+            </div>
 
-  if (loading) return <div className="loading">Loading games...</div>;
-  if (error) return <div className="error">Error: {error}</div>;
-
-  return (
-    <div className="games-grid">
-      {games.map((game) => (
-        <GameCard
-          key={game.id}
-          title={game.name}
-          subtitle={`${game.ratings_count} ratings`}
-          imageUrl={game.background_image || '/placeholder-game.jpg'}
-          isTrending={game.rating > 4}
-          releaseInfo={new Date(game.released).toLocaleDateString()}
-          rating={game.rating}
-        />
-      ))}
-    </div>
-  );
+            <div className="card-content">
+                <h3 className="card-title">{title}</h3>
+                {subtitle && <h4 className="card-subtitle">{subtitle}</h4>}
+                {releaseInfo && <p className="release-info">{releaseInfo}</p>}
+                {rating && (
+                    <div className="rating-container">
+                        <span className="rating-stars">
+                            {'★'.repeat(Math.round(rating))}
+                            {'☆'.repeat(5 - Math.round(rating))}
+                        </span>
+                        <span className="rating-value">{rating.toFixed(1)}/5</span>
+                    </div>
+                )}
+            </div>
+        </div>
+    );
 };
 
-export default GameList;
+export default GameCard;
