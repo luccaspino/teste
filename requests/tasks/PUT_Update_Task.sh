@@ -1,0 +1,9 @@
+curl --request PUT \
+  --url http://localhost:3000/tasks/681cc57c8c4750dfec7c1acc \
+  --header "Content-Type: application/json" \
+  --header "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MTRlNWRlZDM3YzM2ZDczZmU5YTBlOSIsImlhdCI6MTc0NzAwMDIzNywiZXhwIjoxNzQ3MDAzODM3fQ.cK1DZnDFWcpZol0ZEGwTzIVTSV76FACh_b5LFLTbw3k" \
+  --data '{
+    "title": "Estudar Sistemas",
+    "description": "Finalizar slides e estudar falas",
+    "completed": true
+  }'

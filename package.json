@@ -1,29 +1,31 @@
 {
-  "name": "vite-apigames",
-  "private": true,
-  "version": "0.0.0",
+  "name": "express-backend-example",
+  "version": "0.3.0",
+  "description": "",
+  "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "start:app": "nodemon src/index.js",
+    "start:database": "docker compose up -d",
+    "stop:database": "docker compose down",
+    "generate-secret-key": "node -e \"console.log(require('crypto').randomBytes(32).toString('hex'))\"",
+    "test": "jest"
   },
+  "author": "",
   "dependencies": {
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.15.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
-    "@eslint/js": "^9.21.0",
-    "@types/react": "^19.0.10",
-    "@types/react-dom": "^19.0.4",
-    "@vitejs/plugin-react": "^4.3.4",
-    "eslint": "^9.21.0",
-    "eslint-plugin-react-hooks": "^5.1.0",
-    "eslint-plugin-react-refresh": "^0.4.19",
-    "globals": "^15.15.0",
-    "typescript": "~5.7.2",
-    "typescript-eslint": "^8.24.1",
-    "vite": "^6.2.0"
+    "@babel/plugin-transform-modules-commonjs": "^7.27.1",
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.10",
+    "supertest": "^7.1.1"
   }
 }

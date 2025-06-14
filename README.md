@@ -1,54 +1,71 @@
-# React + TypeScript + Vite
+# 🛡️ Backend API com Autenticação JWT
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este projeto é uma API RESTful desenvolvida com **Node.js**, **Express** e **MongoDB**, utilizando **Mongo Express** para visualização do banco de dados e autenticação de usuários via **JWT (JSON Web Token)**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✅ Funcionalidades
 
-## Expanding the ESLint configuration
+### 🔓 Rotas Públicas
+- `POST /users/register` - Cria um novo usuário com nome, e-mail e senha criptografada.
+- `POST /users/login` - Autentica um usuário e retorna um token JWT.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 🔐 Rotas Protegidas
+- `GET /protected` - Retorna mensagem de sucesso apenas se o token JWT for válido no header `Authorization`.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+---
+## Lista de Tarefas (to-do-list):
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+A aplicação Back-end é utilizada como uma lista de tarefas para o usuário.
+Cada tarefa terá:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+-> title (string, obrigatório)
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+-> description (string, opcional)
+
+-> completed (boolean, padrão: false)
+
+-> createdAt (data, padrão: agora)
+
+-> userId (referência ao usuário que criou)
+
+## 🧪 Scripts de Teste (requests/)
+
+A pasta `requests/` contém scripts `.sh` com exemplos de:
+
+- Registro bem-sucedido
+- Registro com erro (e-mail inválido, senha fraca, e-mail repetido, mal formatado)
+- Login bem-sucedido
+- Login com erro (credenciais erradas, e-mail inválido, mal formatado)
+- Acesso com token válido
+- Acesso sem token ou com token inválido
+
+Execute um script com:
+
+bash
+source requests/auth/POST_Login_Success.sh
+
+---
+## Variáveis de ambiente que eu utilizei (.env):
+
+PORT=3000
+MONGO_URI=mongodb+srv://miltonkiefermello:sLPfl234hDrY74BD@clusterexpress-exemplo.lcpczqy.mongodb.net/?retryWrites=true&w=majority&appName=ClusterExpress-exemplo
+MONGO_DB_NAME=example
+JWT_SECRET=b7318489bc8114a31a9e505a1b89582afececb43a933ce7e88c04016037afeb6
+
+---
+## Utilização:
+
+Instale as dependência com:
+npm install
+
+Inicie a aplicação com:
+npm run start:app
+
+---
+### Link do Vídeo demonstrativo:
+https://drive.google.com/file/d/1Jz1Wjgq1o2nw1z4WZvTlvBwkI8Rd8poq/view?usp=sharing
+
+### Link do Vercel:
+https://express-backend-example-theta.vercel.app/
+
