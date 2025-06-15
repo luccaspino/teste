@@ -38,6 +38,17 @@ router.post('/', gameController.create);
  *   get:
  *     summary: Lista todos os jogos
  *     tags: [Games]
+ *     parameters:
+ *       - in: query
+ *         name: genre
+ *         schema:
+ *           type: string
+ *         description: Filtrar por gênero
+ *       - in: query
+ *         name: search
+ *         schema:
+ *           type: string
+ *         description: Buscar por título
  *     responses:
  *       200:
  *         description: Lista de jogos
@@ -50,6 +61,19 @@ router.get('/', gameController.getAll);
  *   post:
  *     summary: Importa jogos da API RAWG
  *     tags: [Games]
+ *     parameters:
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           default: 1
+ *         description: Página de resultados
+ *       - in: query
+ *         name: pageSize
+ *         schema:
+ *           type: integer
+ *           default: 20
+ *         description: Quantidade de jogos por página
  *     responses:
  *       200:
  *         description: Jogos importados com sucesso

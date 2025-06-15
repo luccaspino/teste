@@ -27,6 +27,19 @@ const router = express.Router();
  *     responses:
  *       200:
  *         description: Lista de avaliações
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   createdAt:
+ *                     type: string
+ *                     format: date-time
+ *                   updatedAt:
+ *                     type: string
+ *                     format: date-time
  */
 router.get('/game/:gameId', reviewController.getReviewsForGame);
 
@@ -46,6 +59,19 @@ router.get('/game/:gameId', reviewController.getReviewsForGame);
  *     responses:
  *       200:
  *         description: Lista de avaliações do usuário
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   createdAt:
+ *                     type: string
+ *                     format: date-time
+ *                   updatedAt:
+ *                     type: string
+ *                     format: date-time
  */
 router.get('/user/:userId', reviewController.getReviewsForUser);
 
@@ -70,6 +96,17 @@ router.get('/user/:userId', reviewController.getReviewsForUser);
  *     responses:
  *       201:
  *         description: Avaliação criada com sucesso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 createdAt:
+ *                   type: string
+ *                   format: date-time
+ *                 updatedAt:
+ *                   type: string
+ *                   format: date-time
  */
 router.post('/', verifyToken, reviewController.createReview);
 
