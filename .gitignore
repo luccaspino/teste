@@ -1,25 +1,25 @@
-# Node.js
-node_modules/
+# Logs
+logs
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-package-lock.json
-.env
-.env.local
-dist/
-build/
-coverage/
-.DS_Store
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules/
+dist
+dist-ssr
 *.local
-*.env.*
-logs/
-*.log
-.idea/
-.vscode/
-*.swp
-*.swo
-*.tgz
-*.bak
-*.tmp
-# OS generated
-Thumbs.db
+.env
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

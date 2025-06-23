@@ -1,0 +1,56 @@
+.reviews-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Add spacing between reviews */
+    width: 100%; /* Ensure it takes the full width of the parent */
+    box-sizing: border-box;
+}
+
+.reviews-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #f0f0f0; /* Light text color */
+    text-align: center;
+}
+
+.review-card {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #444; /* Darker border */
+    border-radius: 5px;
+    background-color: #333333; /* Darker card background */
+    transition: all 0.3s ease-in-out;
+}
+
+.review-card:hover {
+    background-color: #444444; /* Slightly lighter on hover */
+    transform: scale(1.02); /* Subtle hover effect */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.review-text {
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: #f0f0f0; /* Light text color */
+}
+
+.review-author {
+    font-size: 12px;
+    font-weight: bold;
+    color: #a5a5a5; /* Match button subtext color */
+}
+
+.review-date {
+    font-size: 12px;
+    color: #888888; /* Match lighter text color */
+}
+
+.reviews-loading,
+.reviews-error,
+.no-reviews {
+    font-size: 14px;
+    color: #a5a5a5; /* Match button subtext color */
+    text-align: center;
+    margin-top: 20px;
+}
